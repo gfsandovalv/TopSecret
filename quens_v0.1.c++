@@ -26,49 +26,32 @@ int main(int argc, char *argv[])
   std::vector<int> Next_taken;
   std::vector<int> Taken_effective;
   std::vector<int> Available_effective;
-  
-  N_j(Next_taken,0);
-  set_union(G_i,Next_taken,Taken_effective);
-  set_complement(Taken_effective,Available_effective);
 
+  int pre=0;
   int i=0;
-  
 
-  G_i.push_back(3);
-  arrangement.push_back(3);
-  i=1;
-  N_j(Next_taken,3);
-  set_union(G_i,Next_taken,Taken_effective);
+  N_j(Next_taken,0);
+  set_union(G_i, Next_taken, Taken_effective);
   set_complement(Taken_effective,Available_effective);
 
-  G_i.push_back(5);
-  arrangement.push_back(5);
+  do
+    {
+      //      auto pre=random_value(Available_effective,rd());
+      auto pre=Available_effective[0];
+      G_i.push_back( pre );
+      arrangement.push_back( pre );
+      
+      N_j(Next_taken,pre);
+      set_union(G_i, Next_taken, Taken_effective);
+      set_complement(Taken_effective,Available_effective);
 
-  i=2;
-  N_j(Next_taken,5);
-  set_union(G_i,Next_taken,Taken_effective);
-  set_complement(Taken_effective,Available_effective);
+      
+      i++;  
+    } while (i<N);
 
-  G_i.push_back(2);
-  arrangement.push_back(2);
-  i=3;
-  N_j(Next_taken,2);
-  set_union(G_i,Next_taken,Taken_effective);
-  set_complement(Taken_effective,Available_effective);
-  G_i.push_back(4);
-  arrangement.push_back(4);
-
-  i=4;
-  N_j(Next_taken,4);
-  set_union(G_i,Next_taken,Taken_effective);
-  set_complement(Taken_effective,Available_effective);
-
-  print_vector(G_i);
-  print_vector(arrangement);
-  total_arrangements.push_back(arrangement);
   
   // std::cout << "G_" <<i<< "\n";
-  // print_vector(G_i);
+   print_vector( arrangement);
 
   // std::cout << "N_" <<i<< "\n";
   // print_vector(Next_taken);
